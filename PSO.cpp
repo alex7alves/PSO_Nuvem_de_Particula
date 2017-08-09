@@ -68,9 +68,8 @@ for (int i = 0; i< Tamanho_populacao;i++){
 for (int i = 0; i< Tamanho_populacao;i++){
     Nuvem_particula[i][6] = 1000 ;     // valor inicial  maximo para função objetivo
     Nuvem_particula[i][4] = 0  ;       // Velocidade inicial para x
-    Nuvem_particula[i][5] = 0;
+    Nuvem_particula[i][5] = 0;        //  Velocidade inicial para y
 }
-      //  Velocidade inicial para y
 
 for (int iter = 0; iter<duracao; iter++ )
 {
@@ -81,7 +80,7 @@ for (int iter = 0; iter<duracao; iter++ )
         Nuvem_particula[i][1] = Nuvem_particula[i][1] + Nuvem_particula[i][5];
         x = Nuvem_particula[i][0];
         y = Nuvem_particula[i][1];
-       // cout << Nuvem_particula[i][1]<<"  " << Nuvem_particula[i][2] << endl;
+
         // Fazendo restrições para as posições
         if ( Nuvem_particula[i][0] < -500) {
              Nuvem_particula[i][0] =-500;
@@ -94,6 +93,19 @@ for (int iter = 0; iter<duracao; iter++ )
         }
         if (Nuvem_particula[i][1] > 500) {
             Nuvem_particula[i][1] = 500;
+        }
+        // fazendo restrições para as velocidades
+        if ( Nuvem_particula[i][4] > 30) {
+             Nuvem_particula[i][4] =30;
+        }
+        if (Nuvem_particula[i][5] > 30) {
+            Nuvem_particula[i][5] = 30;
+        }
+         if ( Nuvem_particula[i][4] < -30) {
+             Nuvem_particula[i][4] =-30;
+        }
+        if (Nuvem_particula[i][5] < -30) {
+            Nuvem_particula[i][5] = -30;
         }
 
         saidafuncao = (x*x)+(y*y) +(((3*x)+ (4*y) -26)*((3*x)+ (4*y) -26));
@@ -110,16 +122,22 @@ for (int iter = 0; iter<duracao; iter++ )
         r1 = r1/1000;
         r2= rand()%1000;
         r2 = r2/1000;
-        Nuvem_particula[i][4] =w*Nuvem_particula[i][4] +( c*r1)*(Nuvem_particula[i][2] - Nuvem_particula[i][0]) + (c*r2)*(Nuvem_particula[gbest][2] - Nuvem_particula[i][0])  ;
-        Nuvem_particula[i][5] = w*Nuvem_particula[i][5] + (c*r1)*(Nuvem_particula[i][3] - Nuvem_particula[i][1]) + (c*r2)*(Nuvem_particula[gbest][3] - Nuvem_particula[i][1]) ;
-    }
+        Nuvem_particula[i][4] =(w*Nuvem_particula[i][4]) +(c*r1)*(Nuvem_particula[i][2] - Nuvem_particula[i][0]) + (c*r2)*(Nuvem_particula[gbest][2] - Nuvem_particula[i][0])  ;
+        Nuvem_particula[i][5] = (w*Nuvem_particula[i][5]) + (c*r1)*(Nuvem_particula[i][3] - Nuvem_particula[i][1]) + (c*r2)*(Nuvem_particula[gbest][3] - Nuvem_particula[i][1]) ;
+
+ }
 
 }
 
     for (int i = 0; i< Tamanho_populacao;i++){
         cout << Nuvem_particula[i][0]<<"  " << Nuvem_particula[i][1] << endl;
     }
-
+/*for (int i = 0; i< 30;i++){
+    for (int j = 0; j< 7;j++){
+      cout << Nuvem_particula[i][j]<< " ";
+    }
+    cout << endl;
+}*/
     return 0;
 }
 
