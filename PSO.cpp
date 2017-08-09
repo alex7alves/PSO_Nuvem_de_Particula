@@ -42,21 +42,23 @@ int Minimo (int Tamanho,float m[][7]){
 int main()
 {
 int duracao = 50; // iterações maxima
-float w = 0.4; // ponderação da inercia
-float c= 1.5; // parametro cognitivo
+float w = 0.7; // ponderação da inercia
+float c= 1.2; // parametro cognitivo
 srand(time(NULL));
 
 int Tamanho_populacao = 30,gbest;
 //Criando a população
 float Nuvem_particula[Tamanho_populacao][7];
 float x,y,saidafuncao,r1,r2;
-// Posição atual de x e y =
-//Nuvem_particula(i, 1) e Nuvem_particula(i, 2)
-//  melhor Posição  de x e y =
-//Nuvem_particula(i, 3) e Nuvem_particula(i, 4)
-// Velocidade  de x e y =
-//Nuvem_particula(i, 4) e Nuvem_particula(i, 6)
-// f(p) = Nuvem_particula(i, 7)
+/* Posição atual de x e y =
+    Nuvem_particula[i][0] e Nuvem_particula[i][1]
+    melhor Posição  de x e y =
+    Nuvem_particula[i][2] e Nuvem_particula[i][3]
+    Velocidade  de x e y =
+    Nuvem_particula[i][4] e Nuvem_particula[i][5]
+    f(p) = Nuvem_particula[i][6]
+*/
+
 //Iniciando a população
 for (int i = 0; i< Tamanho_populacao;i++){
     for (int j = 0; j< 7;j++){
@@ -93,9 +95,6 @@ for (int iter = 0; iter<duracao; iter++ )
         if (Nuvem_particula[i][1] > 500) {
             Nuvem_particula[i][1] = 500;
         }
-
-      // z=-x.*sin(sqrt(abs(x)))-y.*sin(sqrt(abs(y)));
-       //saidafuncao = ((x+y).*z).*((x-y).*z);
 
         saidafuncao = (x*x)+(y*y) +(((3*x)+ (4*y) -26)*((3*x)+ (4*y) -26));
         if (saidafuncao < Nuvem_particula[i][6]) {  // f(x)<(fp)
