@@ -30,7 +30,7 @@ int Minimo (int Tamanho,float m[][7]){
     }
     minimo= temp[0];
     for (int i = 0; i< Tamanho;i++){
-         if(minimo < temp[i]) {
+         if(minimo > temp[i]) {
             minimo = temp[i];
             pos = i;
          }
@@ -98,7 +98,7 @@ for (int iter = 0; iter<duracao; iter++ )
        //saidafuncao = ((x+y).*z).*((x-y).*z);
 
         saidafuncao = (x*x)+(y*y) +(((3*x)+ (4*y) -26)*((3*x)+ (4*y) -26));
-        if (saidafuncao < Nuvem_particula[i][6  ]) {  // f(x)<(fp)
+        if (saidafuncao < Nuvem_particula[i][6]) {  // f(x)<(fp)
             Nuvem_particula[i][2] = Nuvem_particula[i][0] ;  // px  =xi
             Nuvem_particula[i][3] = Nuvem_particula[i][1] ;  // py =yi
             Nuvem_particula[i][6] = saidafuncao  ;     //Atualizando a função objetivo para a particula
@@ -107,10 +107,10 @@ for (int iter = 0; iter<duracao; iter++ )
     }
  //  Atualizando as velocidades
     for (int i = 0; i<Tamanho_populacao;i++){
-        r1= rand()%100;
-        r1 = r1/100;
-        r2= rand()%100;
-        r2 = r2/100;
+        r1= rand()%1000;
+        r1 = r1/1000;
+        r2= rand()%1000;
+        r2 = r2/1000;
         Nuvem_particula[i][4] =w*Nuvem_particula[i][4] +( c*r1)*(Nuvem_particula[i][2] - Nuvem_particula[i][0]) + (c*r2)*(Nuvem_particula[gbest][2] - Nuvem_particula[i][0])  ;
         Nuvem_particula[i][5] = w*Nuvem_particula[i][5] + (c*r1)*(Nuvem_particula[i][3] - Nuvem_particula[i][1]) + (c*r2)*(Nuvem_particula[gbest][3] - Nuvem_particula[i][1]) ;
     }
