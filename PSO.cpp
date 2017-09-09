@@ -20,13 +20,13 @@
 
 using namespace std;
 int Minimo (int Tamanho,float m[][7]);
-
+float Randomico();
 int main ()
 {
     srand(time(NULL));
     int duracao = 50; // iterações maxima
     float w = 0.7; // ponderação da inercia
-    float c= 1.2; // parametro cognitivo
+    float c= 1.2,c2=1.4; // parametro cognitivo
     int Tamanho_populacao = 30,gbest;
     //Criando a população
     float Nuvem_particula[Tamanho_populacao][7];
@@ -68,9 +68,22 @@ int main ()
                 // Pegar melhor posição do grupo
                 gbest = Minimo(Tamanho_populacao,Nuvem_particula);  // equivale a f(x) <f(g)
             }
-
-        }
-
+            for (int j=0;j<Tamanho_populacao;j++){
+                 r1= Randomico();
+                 r2= Randomico();
+                 // Atualizando velocidades
+                 Nuvem_particula[j][4] = (w*Nuvem_particula[j][4]) + (c*r1*(Nuvem_particula[j][2] -Nuvem_particula[j][0])) + (c2*r2*(Nuvem_particula[gbest][2] -Nuvem_particula[j][0]));
+                 r1= Randomico();
+                 r2= Randomico();
+                 Nuvem_particula[j][5] = (w*Nuvem_particula[j][5]) + (c*r1*(Nuvem_particula[j][3] -Nuvem_particula[j][1])) + (c2*r2*(Nuvem_particula[gbest][3] -Nuvem_particula[j][1]));
+              //  cout <<  Nuvem_particula[j][4] << " "  << Nuvem_particula[j][5] ;
+            }
+            // Atualizando as posições das particulas
+             Nuvem_particula[i][0]=Nuvem_particula[i][0] +Nuvem_particula[i][4];
+             Nuvem_particula[i][1] = Nuvem_particula[i][1] + Nuvem_particula[i][5];
+   }
+        cout <<  Nuvem_particula[iter][0] << " "  << Nuvem_particula[iter][1] << " " << endl ;
+    //   cout <<  Nuvem_particula[iter][4] << " "  << Nuvem_particula[iter][5] << " " << endl ;
     }
     //gbest = Minimo(Tamanho_populacao,Nuvem_particula);
 
@@ -87,6 +100,12 @@ int Minimo (int Tamanho,float m[][7]){
             pos =i;
        }
     }
-   cout << minimo << "  " << pos;
+  // cout << minimo << "  " << pos;
     return pos;
+}
+
+float Randomico() {
+   float  r= rand()%10000;
+   r = r/10000;
+   return r;
 }
