@@ -5,4 +5,4 @@
 
 Este repositório é destinado a manipulação do algoritmo de nuvem de partículas em **scilab e C/C++** bem como os tipos de paralelização que podem ser feitos nele. 
 
-![Imagem do circuito](https://github.com/alex7alves/Imagens/blob/master/PSX_20171001_205839.jpg)
+
